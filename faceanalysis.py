@@ -21,13 +21,28 @@ def detect_faces():
     return detected_faces
 
 
-def create_list_detected_faceId(detected_faces):
-    detected_faceId = []
+def create_list_detected_face_id(detected_faces):
+    detected_face_id = []
     for images in range(len(detected_faces['FaceRecords'])):
-        detected_faceId.append(detected_faces['FaceRecords'][images]['Face']['FaceId'])
-    return detected_faceId
+        detected_face_id.append(detected_faces['FaceRecords'][images]['Face']['FaceId'])
+    return detected_face_id
 
 
-detected_faces = detect_faces()
-detected_faceId = create_list_detected_faceId(detected_faces)
-print(detected_faceId)
+def compare_images(detected_face_ids):
+    images_result = []
+    for ids in detected_face_ids:
+        images_result.append(
+            client.search_faces(
+                CollectionId='faces',
+                FaceId=ids,
+                FaceMatchThreshold=80,
+                MaxFaces=10,
+            )
+        )
+    return images_result
+
+
+detected = detect_faces()
+face_id_list = create_list_detected_face_id(detected)
+result = compare_images(face_id_list)
+print(json.dumps(result, indent=4))
