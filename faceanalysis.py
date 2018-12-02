@@ -42,7 +42,18 @@ def compare_images(detected_face_ids):
     return images_result
 
 
+def format_output(images_result):
+    json_data = []
+    for face_matches in images_result:
+        if(len(face_matches.get('FaceMatches'))) >= 1:
+            profile = dict(name=face_matches['FaceMatches'][0]['Face']['ExternalImageId'],
+                           faceMatch=round(face_matches['FaceMatches'][0]['Similarity'], 2))
+            json_data.append(profile)
+    return json_data
+
+
 detected = detect_faces()
 face_id_list = create_list_detected_face_id(detected)
 result = compare_images(face_id_list)
-print(json.dumps(result, indent=4))
+output = format_output(result)
+print(json.dumps(output, indent=4))
