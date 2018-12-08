@@ -26,7 +26,7 @@ $.ajax(
       tdInfoFoto = document.createElement("img");
       tdInfoFoto.height = 100;
       tdInfoFoto.width = 100;
-      tdInfoFoto.src = 'http://jon-images-test.s3.amazonaws.com/' + dados.name + '.png';
+      tdInfoFoto.src = 'http://jon-images-test2.s3.amazonaws.com/' + dados.name + '.png';
      
 
 

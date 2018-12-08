@@ -3,7 +3,7 @@ import json
 
 client = boto3.client('rekognition')
 s3 = boto3.resource('s3')
-bucketName = 'jon-images-test'
+bucketName = 'jon-images-test2'
 
 
 def detect_faces():
@@ -64,10 +64,11 @@ def delete_image_collection(detected_face_ids):
     )
 
 
-detected = detect_faces()
-face_id_list = create_list_detected_face_id(detected)
-result = compare_images(face_id_list)
-output = format_output(result)
-publish_output(output)
-delete_image_collection(face_id_list)
-print(json.dumps(output, indent=4))
+def main(event, context):
+    detected = detect_faces()
+    face_id_list = create_list_detected_face_id(detected)
+    result = compare_images(face_id_list)
+    output = format_output(result)
+    publish_output(output)
+    delete_image_collection(face_id_list)
+    print(json.dumps(output, indent=4))
