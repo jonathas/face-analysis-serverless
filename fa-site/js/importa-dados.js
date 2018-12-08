@@ -1,6 +1,6 @@
 
 $.ajax(
-  { url: 'http://jon-site-test-ir.s3.amazonaws.com/dados.json',
+  { url: 'http://jon-site-test-ir.s3-website.eu-west-1.amazonaws.com/dados.json',
    dataType: 'json',
    crossDomain: true,
    success: function (dados) {
