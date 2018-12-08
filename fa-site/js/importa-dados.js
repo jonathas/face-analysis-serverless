@@ -1,6 +1,6 @@
 
 $.ajax(
-  { url: 'https://s3.amazonaws.com/jon-site-test/dados.json',
+  { url: 'http://jon-site-test.s3.amazonaws.com/dados.json',
    dataType: 'json',
    crossDomain: true,
    success: function (dados) {
@@ -25,8 +25,8 @@ $.ajax(
       tdInfoFaceMatch.textContent = dados.faceMatch;
       tdInfoFoto = document.createElement("img");
       tdInfoFoto.height = 100;
-      tdInfoFoto.width = 68;
-      tdInfoFoto.src = 'https://s3.amazonaws.com/jon-images-test/' + dados.name + '.png';
+      tdInfoFoto.width = 100;
+      tdInfoFoto.src = 'http://jon-images-test.s3.amazonaws.com/' + dados.name + '.png';
      
 
 

@@ -52,8 +52,14 @@ def format_output(images_result):
     return json_data
 
 
+def publish_output(json_data):
+    s3_obj = s3.Object('jon-site-test', 'dados.json')
+    s3_obj.put(Body=json.dumps(json_data))
+
+
 detected = detect_faces()
 face_id_list = create_list_detected_face_id(detected)
 result = compare_images(face_id_list)
 output = format_output(result)
+publish_output(output)
 print(json.dumps(output, indent=4))
