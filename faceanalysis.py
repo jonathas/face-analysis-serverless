@@ -3,7 +3,7 @@ import json
 
 client = boto3.client('rekognition')
 s3 = boto3.resource('s3')
-bucketName = 'jon-images-test2'
+bucketName = 'jon-images-test-ir'
 
 
 def detect_faces():
@@ -53,7 +53,7 @@ def format_output(images_result):
 
 
 def publish_output(json_data):
-    s3_obj = s3.Object('jon-site-test', 'dados.json')
+    s3_obj = s3.Object('jon-site-test-ir', 'dados.json')
     s3_obj.put(Body=json.dumps(json_data))
 
 
