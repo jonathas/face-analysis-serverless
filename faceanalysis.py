@@ -57,9 +57,17 @@ def publish_output(json_data):
     s3_obj.put(Body=json.dumps(json_data))
 
 
+def delete_image_collection(detected_face_ids):
+    client.delete_faces(
+        CollectionId='faces',
+        FaceIds=detected_face_ids,
+    )
+
+
 detected = detect_faces()
 face_id_list = create_list_detected_face_id(detected)
 result = compare_images(face_id_list)
 output = format_output(result)
 publish_output(output)
+delete_image_collection(face_id_list)
 print(json.dumps(output, indent=4))
